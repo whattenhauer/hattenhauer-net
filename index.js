@@ -19,7 +19,7 @@ export default {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>hattenhauer-maintenance</title>
+<title>hattenhauer-net</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
@@ -52,7 +52,7 @@ p {
 </head>
 <body>
 <div class="overlay">
-  <h1>hattenhauer-maintenance</h1>
+  <h1>hattenhauer-net</h1>
   <p>Worker is online</p>
 </div>
 </body>
