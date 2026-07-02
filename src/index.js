@@ -1,8 +1,19 @@
+import { getAssetFromKV } from '@cloudflare/kv-asset-handler';
+
 export default {
   async fetch(request, env, ctx) {
     try {
       const url = new URL(request.url);
       const path = url.pathname;
+
+      // Serve static assets from the site bucket (src/assets)
+      if (path.startsWith('/assets/') || path.match(/\.(jpg|jpeg|png|gif|ico|svg)$/i)) {
+        try {
+          return await getAssetFromKV({ request });
+        } catch (err) {
+          return new Response('Not found', { status: 404 });
+        }
+      }
 
       if (path === '/nasa-bg.jpg') {
         const img = await fetch('https://images-assets.nasa.gov/image/art002e014066/art002e014066~large.jpg', {
