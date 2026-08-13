@@ -130,7 +130,7 @@ async function gatherContent(geo, env, ctx) {
   ];
 
   const biblicalPubs = [
-    { title: 'EKO Books: Interesting Books ', desc: 'EKO writes the untold story of Jesus. The Nazarene Saga follows the carpenter through the years the Gospels leave mostly silent: the work, family obligations, friendships, and journeys that preceded his public ministry. EKO is also the author of the Unsealed Archives, historical thrillers drawn from declassified records and unresolved testimony. He spends the rest of his time with his children, usually outdoors or on a motorcycle.', price: '~ $14.98 pe paperback', link: 'https://amzn.to/4zdF1yy', tag: 'New Release' },
+    { title: 'EKO Books: Interesting Books ', desc: 'EKO writes about the untold stories of Jesus. The Nazarene Saga follows the carpenter through the years that the Gospels leave mostly silent; the work, family obligations, friendships, and journeys that preceded his public ministry. EKO is also the author of the Unsealed Archives; historical thrillers drawn from declassified records and unresolved testimony in history.', price: '~ $14.98 per paperback', link: 'https://amzn.to/4zdF1yy', tag: 'New Release' },
     { title: 'The Bible Project: Understanding Scripture', desc: 'A visual journey through every book of the Bible', price: '$29.99', link: '#', tag: 'New Release' },
     { title: 'Knowing God', desc: "J.I. Packer's classic guide to the character of God", price: '$15.99', link: '#', tag: 'Classic' },
     { title: 'The Case for Christ', desc: "A journalist's personal investigation of the evidence", price: '$13.99', link: '#', tag: 'Bestseller' },
