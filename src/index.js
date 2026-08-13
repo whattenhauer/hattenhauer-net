@@ -449,6 +449,10 @@ function landingPage() {
   '<h3>Operations</h3>' +
   '<p>Process optimization, automation, and operational excellence programs.</p>' +
   '</div>' +
+  '<div class="card" onmouseup="window.location.href=\'/a\'" style="cursor:pointer">' +
+  '<h3>Resources for Growth</h3>' +
+  '<p>Here are some valuable resources to help your personal and professional growth.</p>' +
+  '</div>' +
   '</div>' +
   '</section>' +
   '<section class="section">' +
