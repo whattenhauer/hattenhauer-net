@@ -1,3 +1,7 @@
 name = "hattenhauer-net"
 main = "src/index.js"
-compatibility_date = "2026-06-29"
+compatibility_date = "2026-08-25"
+[[d1_databases]]
+binding = "DB"
+database_name = "HattNetW1"
+database_id = "548737d3-62f4-490d-b76c-f6cbe524b3f9"

@@ -753,6 +753,10 @@ function landingPage() {
   '<h3>Operations</h3>' +
   '<p>Process optimization, automation, and operational excellence programs.</p>' +
   '</div>' +
+  '<div class="card">' +
+  '<h3>Resources</h3>' +
+  '<a href="https://hattenhauer.net/a" class="btn btn-outline">Excellent Resources & Programs.</a>' +
+  '</div>' +
   '</div>' +
   '</section>' +
   '<section class="section">' +
