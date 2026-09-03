@@ -3,21 +3,14 @@ main = "src/index.js"
 compatibility_date = "2026-08-25"
 compatibility_flags = ["nodejs_compat"]
 
-routes = [
-  { pattern = "hattenhauer.net/*", zone_name = "hattenhauer.net" }
-]
+# Bindings (configure these to match your environment)
+# [vars]
+# AMAZON_ASSOCIATE_TAG = "your-tag-20"
 
-# D1 database binding
-[[d1_databases]]
-binding = "DB"
-database_name = "HattNetW1"
-database_id = "548737d3-62f4-490d-b76c-f6cbe524b3f9"
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "hattenhauer-net-db"
+# database_id = "your-d1-database-id"
 
-# Workers AI binding
-[ai]
-binding = "AI"
-
-# Amazon Associate tag is stored as a secret, NOT in this file.
-# Set it once after deploy with:
-#   npx wrangler secret put AMAZON_ASSOCIATE_TAG
-# Then enter: hattenhauer0e-20
+# [ai]
+# binding = "AI"
