@@ -1,7 +1,28 @@
+/**
+ * hattenhauer-net Worker
+ *
+ * Routes:
+ *   /            Landing page
+ *   /a           Discover & Shop (Amazon Associate links, D1-driven)
+ *   /health      Health check
+ *   /nasa-bg.jpg Proxied NASA background image
+ *   /favicon.ico 204 no-content
+ *
+ * Bindings:
+ *   DB  D1 database (HattNetW1) containing the `products` table
+ *   AI  Workers AI (for auto-translation; optional, degrades gracefully)
+ *
+ * Secrets:
+ *   AMAZON_ASSOCIATE_TAG Your Amazon Associate tag (e.g. hattenhauer0e-20)
+ *     Set with: npx wrangler secret put AMAZON_ASSOCIATE_TAG
+ */
+
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
 // src/index.js
+var __defProp2 = Object.defineProperty;
+var __name2 = /* @__PURE__ */ __name((target, value) => __defProp2(target, "name", { value, configurable: true }), "__name");
 var index_default = {
   async fetch(request, env, ctx) {
     try {
@@ -53,6 +74,7 @@ async function handleAdsPage(request, env, ctx) {
   return adsHtml(adsPageHTML(uiStrings, translatedSections, geo, viewerLang, langName, needsTranslation));
 }
 __name(handleAdsPage, "handleAdsPage");
+__name2(handleAdsPage, "handleAdsPage");
 async function gatherContent(env) {
   if (env.DB) {
     try {
@@ -64,6 +86,7 @@ async function gatherContent(env) {
   return gatherFallbackContent();
 }
 __name(gatherContent, "gatherContent");
+__name2(gatherContent, "gatherContent");
 async function gatherFromD1(env) {
   const associateTag = env.AMAZON_ASSOCIATE_TAG || "";
   const fallback = gatherFallbackContent();
@@ -89,12 +112,14 @@ async function gatherFromD1(env) {
   return sections;
 }
 __name(gatherFromD1, "gatherFromD1");
+__name2(gatherFromD1, "gatherFromD1");
 function buildAmazonLink(asin, associateTag) {
   if (!asin) return "#";
   const base = `https://www.amazon.com/dp/${asin}`;
   return associateTag ? `${base}?tag=${associateTag}` : base;
 }
 __name(buildAmazonLink, "buildAmazonLink");
+__name2(buildAmazonLink, "buildAmazonLink");
 function gatherFallbackContent() {
   const familyProducts = [
     { title: "The Forge", desc: "The Forge - Blu-ray + Digital", price: "$24.95,$18.95", link: "https://www.amazon.com/dp/B0DJPNFGRV", tag: "Bluray+Digital,DVD"},
@@ -138,6 +163,7 @@ function gatherFallbackContent() {
   ];
 }
 __name(gatherFallbackContent, "gatherFallbackContent");
+__name2(gatherFallbackContent, "gatherFallbackContent");
 async function translateContent(AI, uiStrings, sections, targetLangName) {
   const payload = {
     ui: uiStrings,
@@ -173,6 +199,7 @@ async function translateContent(AI, uiStrings, sections, targetLangName) {
   return { ui: translated.ui || uiStrings, sections: translatedSections };
 }
 __name(translateContent, "translateContent");
+__name2(translateContent, "translateContent");
 var LANGUAGE_NAMES = {
   en: "English",
   es: "Spanish",
@@ -213,6 +240,7 @@ function parseAcceptLanguage(header) {
   return langs[0]?.code || "en";
 }
 __name(parseAcceptLanguage, "parseAcceptLanguage");
+__name2(parseAcceptLanguage, "parseAcceptLanguage");
 var UI_STRINGS = {
   pageTitle: "Discover & Shop",
   pageSubtitle: "Context-driven recommendations based on your location and interests",
@@ -258,6 +286,7 @@ function adsPageHTML(strings, sections, geo, viewerLang, langName, translated) {
   return '<nav class="ads-nav"><a href="/" class="nav-home">\u2190 ' + strings.backHome + '</a><span class="nav-brand">Hattenhauer</span></nav><header class="ads-hero"><h1>' + strings.pageTitle + "</h1><p>" + strings.pageSubtitle + '</p><div class="geo-badge">\u{1F4CD} ' + strings.detectedLocation + ": <strong>" + locationStr + "</strong>" + (geo.latitude ? " (" + geo.latitude + ", " + geo.longitude + ")" : "") + '</div><div class="lang-badge">\u{1F310} ' + strings.detectedLanguage + ": <strong>" + langName + "</strong>" + (translated ? '<span class="translated-note"> \u2014 ' + strings.autoTranslated + "</span>" : "") + '</div></header><div class="ads-note">\u2139\uFE0F ' + strings.loadingNote + "</div>" + sectionsHTML + '<div class="affiliate-disclosure">' + strings.affiliateDisclosure + '</div><footer class="ads-footer"><p>\xA9 ' + year + ' William Hattenhauer. All rights reserved.</p><p><a href="/">hattenhauer.net</a></p></footer>';
 }
 __name(adsPageHTML, "adsPageHTML");
+__name2(adsPageHTML, "adsPageHTML");
 function adsHtml(content) {
   const page = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hattenhauer \u2014 Discover & Shop</title><meta name="description" content="Context-driven recommendations for family, health, faith, music, podcasts, and local events"><meta name="robots" content="noindex, follow"><style>:root{--teal:#40E0D0;--teal-dark:#20B2AA;--bg-dark:#0a0a0f;--bg-card:rgba(255,255,255,0.03);--text:#e4e4e7;--text-muted:#a1a1aa;--border:rgba(255,255,255,0.08);--tag-bg:rgba(64,224,208,0.12)}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg-dark);color:var(--text);line-height:1.6;min-height:100vh}.ads-nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,10,15,0.85);backdrop-filter:blur(12px);z-index:100}.nav-home{color:var(--teal);text-decoration:none;font-size:0.9rem}.nav-home:hover{opacity:0.7}.nav-brand{font-weight:700;font-size:1.1rem;background:linear-gradient(135deg,var(--teal) 0%,#7dd3fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.ads-hero{text-align:center;padding:3rem 2rem 2rem;max-width:900px;margin:0 auto}.ads-hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:0.75rem;background:linear-gradient(135deg,var(--teal) 0%,#7dd3fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.ads-hero p{color:var(--text-muted);font-size:1.1rem;max-width:560px;margin:0 auto 1.5rem}.geo-badge,.lang-badge{display:inline-block;padding:0.5rem 1.25rem;border-radius:8px;font-size:0.9rem;margin:0.25rem;background:var(--bg-card);border:1px solid var(--border)}.geo-badge strong,.lang-badge strong{color:var(--teal)}.translated-note{color:var(--text-muted);font-size:0.85rem}.ads-note{text-align:center;padding:0.75rem 2rem;color:var(--text-muted);font-size:0.85rem;background:rgba(64,224,208,0.04);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.content-section{padding:3rem 2rem;max-width:1200px;margin:0 auto}.section-header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:2rem}.section-icon{font-size:2rem;flex-shrink:0}.section-header h2{font-size:1.5rem;font-weight:700;margin-bottom:0.25rem;color:var(--text)}.section-header p{color:var(--text-muted);font-size:0.95rem}.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}.product-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:all 0.2s ease;display:flex;flex-direction:column}.product-card:hover{border-color:rgba(64,224,208,0.2);transform:translateY(-3px)}.product-tag{display:inline-block;padding:0.25rem 0.75rem;border-radius:6px;font-size:0.75rem;font-weight:600;background:var(--tag-bg);color:var(--teal);margin-bottom:0.75rem;align-self:flex-start}.product-card h3{font-size:1.05rem;font-weight:600;margin-bottom:0.5rem;color:var(--text)}.product-card p{color:var(--text-muted);font-size:0.9rem;flex-grow:1;margin-bottom:1rem}.product-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto}.product-price{font-weight:700;color:var(--teal);font-size:1rem}.product-link{color:var(--text-muted);text-decoration:none;font-size:0.85rem;transition:color 0.2s}.product-link:hover{color:var(--teal)}.no-events{color:var(--text-muted);font-style:italic;padding:1rem 0}.affiliate-disclosure{text-align:center;padding:1.5rem 2rem;color:var(--text-muted);font-size:0.8rem;max-width:800px;margin:0 auto;line-height:1.5}.ads-footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.9rem}.ads-footer a{color:var(--teal);text-decoration:none}.ads-footer a:hover{text-decoration:underline}@media(max-width:640px){.ads-nav{padding:0.75rem 1rem}.ads-hero{padding:2rem 1rem 1rem}.content-section{padding:2rem 1rem}.section-header{flex-direction:column;gap:0.5rem}}</style></head><body>' + content + "</body></html>";
   return new Response(page, {
@@ -266,15 +295,18 @@ function adsHtml(content) {
   });
 }
 __name(adsHtml, "adsHtml");
+__name2(adsHtml, "adsHtml");
 function landingPage() {
   const year = (/* @__PURE__ */ new Date()).getFullYear();
   return `<section class="hero"><div class="hero-content"><h1>Hattenhauer</h1><p>Professional services, strategic consulting, and technical solutions for modern businesses.</p><div class="actions"><a href="mailto:contact@hattenhauer.net" class="btn btn-primary">Get in Touch</a><a href="#services" class="btn btn-outline">Learn More</a></div></div></section><section class="section" id="services"><h2>What We <span>Do</span></h2><p>Focused expertise across strategy, technology, and operations to drive measurable outcomes.</p><div class="grid"><div class="card"><h3>Strategy</h3><p>Business planning, market analysis, and growth roadmaps tailored to your goals.</p></div><div class="card"><h3>Technology</h3><p>Cloud architecture, system design, and digital transformation at scale.</p></div><div class="card"><h3>Operations</h3><p>Process optimization, automation, and operational excellence programs.</p></div><div class="card"><h3>Resources</h3><a href="https://hattenhauer.net/a" class="btn btn-outline">Excellent Resources & Programs.</a></div></div></section><section class="section"><h2>Get <span>Started</span></h2><p>Ready to take the next step? Reach out and let's build something great together.</p><div class="actions"><a href="mailto:contact@hattenhauer.net" class="btn btn-primary">Contact Us</a></div></section><footer class="footer"><p>\xA9 ` + year + ' William Hattenhauer. All rights reserved.</p><p><a href="/">hattenhauer.net</a></p></footer>';
 }
 __name(landingPage, "landingPage");
+__name2(landingPage, "landingPage");
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 }
 __name(json, "json");
+__name2(json, "json");
 function html(content, status = 200) {
   const year = (/* @__PURE__ */ new Date()).getFullYear();
   const page = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hattenhauer</title><meta name="description" content="Hattenhauer - Professional services and consulting"><style>:root{--teal:#40E0D0;--teal-dark:#20B2AA;--bg-dark:#0a0a0f;--bg-card:rgba(255,255,255,0.03);--text:#e4e4e7;--text-muted:#a1a1aa;--border:rgba(255,255,255,0.08)}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg-dark);color:var(--text);line-height:1.6;min-height:100vh}.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;background:linear-gradient(180deg,rgba(10,10,15,0.3) 0%,var(--bg-dark) 100%),url(/nasa-bg.jpg) center/cover no-repeat fixed}.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 0%,var(--bg-dark) 90%);pointer-events:none}.hero-content{position:relative;z-index:1;max-width:800px}.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:1rem;background:linear-gradient(135deg,var(--teal) 0%,#7dd3fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.hero p{font-size:clamp(1.1rem,2.5vw,1.35rem);color:var(--text-muted);max-width:560px;margin:0 auto 2.5rem}.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.875rem 2rem;border-radius:8px;font-size:1rem;font-weight:600;text-decoration:none;transition:all 0.2s ease;cursor:pointer;border:none}.btn-primary{background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);color:#0a0a0f}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(64,224,208,0.25)}.btn-outline{background:transparent;color:var(--teal);border:1.5px solid var(--teal);margin-left:0.75rem}.btn-outline:hover{background:var(--teal);color:#0a0a0f}.actions{display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center}.section{padding:5rem 2rem;max-width:1100px;margin:0 auto}.section h2{font-size:2rem;font-weight:700;margin-bottom:1rem;text-align:center}.section h2 span{color:var(--teal)}.section>p{text-align:center;color:var(--text-muted);max-width:600px;margin:0 auto 3rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}.card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:all 0.2s ease}.card:hover{border-color:rgba(64,224,208,0.2);transform:translateY(-3px)}.card h3{font-size:1.15rem;font-weight:600;margin-bottom:0.5rem;color:var(--teal)}.card p{color:var(--text-muted);font-size:0.95rem}.footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.9rem}.footer a{color:var(--teal);text-decoration:none}.footer a:hover{text-decoration:underline}@media(max-width:480px){.btn-outline{margin-left:0}}</style></head><body>' + content + "</body></html>";
@@ -284,6 +316,7 @@ function html(content, status = 200) {
   });
 }
 __name(html, "html");
+__name2(html, "html");
 export {
   index_default as default
 };
