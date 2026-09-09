@@ -4,13 +4,13 @@ compatibility_date = "2026-08-25"
 compatibility_flags = ["nodejs_compat"]
 
 # Bindings (configure these to match your environment)
-# [vars]
-# AMAZON_ASSOCIATE_TAG = "your-tag-20"
+[category, asin, title, description, price, tag]
+AMAZON_ASSOCIATE_TAG = "hattenhauer0e-20"
 
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "hattenhauer-net-db"
-# database_id = "your-d1-database-id"
+[[d1_databases]]
+binding = "DB"
+database_name = "products"
+database_id = "548737d3-62f4-490d-b76c-f6cbe524b3f9"
 
 # [ai]
 # binding = "AI"
