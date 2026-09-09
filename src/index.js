@@ -97,16 +97,16 @@ function buildAmazonLink(asin, associateTag) {
 __name(buildAmazonLink, "buildAmazonLink");
 function gatherFallbackContent() {
   const familyProducts = [
-    { title: "The Whole-Brain Child", desc: "12 revolutionary strategies to nurture your child's developing mind", price: "$14.99", link: "#", tag: "Bestseller" },
-    { title: "Boundaries with Kids", desc: "How healthy choices grow healthy children", price: "$12.99", link: "#", tag: "Trending" },
-    { title: "Parenting with Love and Logic", desc: "Teaching children responsibility and character", price: "$16.99", link: "#", tag: "Popular" },
+    { title: "The Forge", desc: "The Forge - Blu-ray + Digital", price: "$24.95,$18.95", link: "https://www.amazon.com/dp/B0DJPNFGRV", tag: "Bluray+Digital,DVD"},
+    { title: "Two Sons And A Father", desc: "How healthy choices grow healthy children", price: "$Free", link: "https://www.amazon.com/dp/B01MXT5QEV", tag: "Some things are invaluable" },
+    { title: "The Story of Marriage", desc: "In The Story of Marriage, John and Lisa Bevere invite you to rediscover God's original plan", price: "$18.18 paperback", link: "https://www.amazon.com/dp/B00MMPM3WO", tag: "Kindle/Hardcover/Paperback" },
     { title: "The 5 Love Languages of Children", desc: "Discover your child's love language", price: "$11.99", link: "#", tag: "New" }
   ];
   const healthProducts = [
-    { title: "Vitamin D3 + K2 Complex", desc: "Bone health and immune support formula", price: "$24.99", link: "#", tag: "Bestseller" },
-    { title: "Natural Sleep Support", desc: "Melatonin-free restful sleep blend", price: "$19.99", link: "#", tag: "Trending" },
-    { title: "Omega-3 Fish Oil", desc: "Ultra-pure molecularly distilled EPA/DHA", price: "$22.99", link: "#", tag: "Popular" },
-    { title: "Organic Turmeric Curcumin", desc: "With black pepper extract for absorption", price: "$17.99", link: "#", tag: "New" }
+    { title: "Vimergy Liquid Vitamin B12", desc: "Support Brain Function, 2500 mcg, Organic, 240 Servings, 120 Servings, 240 mL", price: "Low as $24.04/fluid ounce", tag: "Bottle 8.12 fluid ounces", link: "https://www.amazon.com/dp/B0D5KQHDRL" },
+    { title: "Vimergy Micro-C® Vitamin C Capsules 500mg", desc: "Whole Body Immunity, Equal to 7 Oranges, Promotes Collagen and Healthy Bones, Kosher, Vegan & Gluten-Fre, 300 Servings, Value Size", price: "Low as 91.00 - $00.30/count", tag: "300 Capsules, 300 Servings", link: "https://www.amazon.com/dp/B0CJ5S3XK6" },
+    { title: "VIMERGY Magnesium Glycinate", desc: "Supports Brain Body Comfort, Relaxation and Deep Rest, Promotes Bone, Joint, and Muscle Health, Eases Everyday Stress", price: "Low as 57.00 - $0.19/count", tag: "300 Capsules, 150 Servings", link: "https://www.amazon.com/dp/B0CJ5QF932"},
+    { title: "VIMERGY Liquid Zinc 7.5mg", desc: "Organic Immune Support, 120 Servings, 240 mL", price: "Low as $9.63/fluid ounce", tag: "Bottle 8.12 fluid ounces", link: "https://www.amazon.com/dp/B0D5KFX8VL" }
   ];
   const biblicalPubs = [
     { title: "EKO Books: Interesting Books", desc: "EKO writes the untold story of Jesus. The Nazarene Saga follows the carpenter through the years the Gospels leave mostly silent.", price: "~ $14.98 per paperback", link: "#", tag: "New Release" },
