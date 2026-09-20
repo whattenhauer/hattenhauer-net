@@ -7,7 +7,7 @@
  *   /health      Health check
  *   /nasa-bg.jpg Proxied NASA background image
  *   /favicon.ico 204 no-content
- *
+ *   /src/cropped-smith-1.jpg  => https://github.com/whattenhauer/hattenhauer-net/blob/main/src/cropped-smith-1.jpg ???
  * Bindings:
  *   DB  D1 database (HattNetW1) containing the `products` table
  *   AI  Workers AI (for auto-translation; optional, degrades gracefully)
