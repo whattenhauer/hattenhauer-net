@@ -4,7 +4,7 @@ compatibility_date = "2026-08-25"
 compatibility_flags = ["nodejs_compat"]
 
 # Bindings (configure these to match your environment)
-[category, asin, title, description, price, tag]
+[vars]
 AMAZON_ASSOCIATE_TAG = "hattenhauer0e-20"
 
 [[d1_databases]]
